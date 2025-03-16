@@ -30,12 +30,32 @@
                 <option value="N">Not Verified</option>
             </select>
         </div>
-        <button id="fetch-button" type="submit" onclick="setAction('/fetch-record')">Find Students</button>
-        <button id="add-button" type="submit" onclick="setAction('/add-record'); return formValidation();">Add Student</button>
+        <button id="find-button" type="submit" onclick="setAction('/find-records')">Find Students</button>
+        <button id="add-button" type="submit" onclick="setAction('/add-records'); return formValidation();">Add Student</button>
     </form>
 
-    <% if () %>
-    <p id="error-msg" style="color: darkred;"></p>
+    <% if (student_records >0) { %>
+        <h2>Search Results:</h2>
+        <table border="1">
+            <tr>
+                <th>Register Number</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Registration Type</th>
+                <th>Verification Status</th>
+            </tr>
+            <% student_records.forEach(record => { %>
+                <tr>
+                    <td><%= record.regNo %></td>
+                    <td><%= record.name %></td>
+                    <td><%= record.dept %></td>
+                    <td><%= record.regType %></td>
+                    <td><%= record.isVerified %></td>
+                </tr>
+            <% }); %>
+        </table>
+    <% } %>
+    <p id="error-message" style="color: darkred;"></p>
 
 
     <script>
@@ -51,8 +71,8 @@
             let isVerified = document.getElementById("input-isVerified").value;
 
             if (!regNo || !name || !dept || !regType || !isVerified) {
-                document.getElementById("error-msg").innerText = "All Fields Required";
-                return false;
+                document.getElementById("error-message").innerText = "All Fields Required";
+                return false; //Prevents Form Submission
             }
             else
                 return true;
