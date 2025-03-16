@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Student Register</h2>
+    <form id="control-form" method="POST">
+        <div id="student-attributes">
+            <input id="input-regNo" name="regNo" type="text" placeholder="Enter Register Number">
+            <input id="input-name" name="name" type="text" placeholder="Enter Student Name">
+            <select id="input-dept" name="dept">
+                <option value="">Select Department</option>
+                <option value="CT">CT</option>
+                <option value="IT">IT</option>
+                <option value="ECE">ECE</option>
+                <option value="ROBOTICS">ROBOTICS</option>
+            </select>
+            <select id="input-regType" name="regType">
+                <option value="" >Select Type of Registration</option>
+                <option value="R">Regular</option>
+                <option value="S">Self Supporting</option>
+                <option value="L">Lateral</option>
+            </select>
+            <select id="input-isVerified" name="isVerified">
+                <option value="" >NULL</option>
+                <option value="Y">Verified</option>
+                <option value="N">Not Verified</option>
+            </select>
+        </div>
+        <button id="fetch-button" type="submit" onclick="setAction('/fetch-record')">Find Students</button>
+        <button id="add-button" type="submit" onclick="setAction('/add-record'); return formValidation();">Add Student</button>
+    </form>
+
+    <% if () %>
+    <p id="error-msg" style="color: darkred;"></p>
+
+
+    <script>
+        function setAction(action) {
+            document.getElementById("control-form").action = action;
+        }
+
+        function formValidation() {
+            let regNo = document.getElementById("input-regNo").value.trim();
+            let name = document.getElementById("input-name").value.trim();
+            let dept = document.getElementById("input-dept").value;
+            let regType = document.getElementById("input-reType").value;
+            let isVerified = document.getElementById("input-isVerified").value;
+
+            if (!regNo || !name || !dept || !regType || !isVerified) {
+                document.getElementById("error-msg").innerText = "All Fields Required";
+                return false;
+            }
+            else
+                return true;
+        }
+    </script>
+</body>
+</html>
