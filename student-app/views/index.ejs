@@ -30,8 +30,13 @@
                 <option value="N">Not Verified</option>
             </select>
         </div>
-        <button id="find-button" type="submit" onclick="setAction('/find-records')">Find Students</button>
-        <button id="add-button" type="submit" onclick="setAction('/add-records'); return formValidation();">Add Student</button>
+        <div>
+            <button id="find-button" type="submit" onclick="setAction('/find-records')">Find Students</button>
+            <button id="add-button" type="submit" onclick="setAction('/add-records'); return formValidation();">Add Student</button>
+        </div>
+        <div>
+            <button id="verification-button" type="submit" onclick="setAction('/update-verification')">Update Verification</button>
+        </div>
     </form>
 
     <% if (student_records.length > 0) { %>

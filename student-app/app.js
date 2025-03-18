@@ -119,5 +119,22 @@ app.post('/add-records', async (req,res) => {
     }
 });
 
+app.post('/update-verification', async (req,res) => {
+    try {
+        let query = `BEGIN update_lateral_verification; END;`;
+        const connection = await oracledb.getConnection(DBConfig); // Await Database Connection
+        await connection.execute(query,[],{ autoCommit: true }); // Await Execution + Commit
+        console.log("Verification Status for Lateral Entries Updated");
+        await connection.close(); // Await Connection Closure after Execution
+    } catch (error) {
+        console.error("Database error:", error);
+        res.render('index', {
+            student_records: [],
+            searchParams: req.body,
+            errorMessage: "Database Error: " + error.message
+        });
+    }
+})
+
 const port = 3000;
 app.listen(port, () => console.log(`App is running on port ${port}`));
